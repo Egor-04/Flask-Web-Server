@@ -65,4 +65,5 @@ def add_customer_to_DB(new_user):
 
 
 if __name__ == '__main__':
+    #Test
     app.run()
