@@ -63,9 +63,6 @@ def add_customer_to_DB(new_user):
         connection.commit()
         connection.close()
 
-def get_user_id():
-    return [index for index in range(len(users))]
 
 if __name__ == '__main__':
-    #get_user_id()
     app.run()
