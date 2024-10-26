@@ -215,19 +215,27 @@ class Notification(QtWidgets.QDialog):
         layout = QtWidgets.QVBoxLayout(self)
         self.label = QtWidgets.QLabel(message)
         self.label.setStyleSheet(
-            "color: white; background-color: green; padding: 10px; border-radius: 5px; font-size: 16px;")  # Установлен размер шрифта
+            "color: white; background-color: #7199a1; padding: 10px; border-radius: 5px; font-size: 16px;")  # Установлен размер шрифта
         self.label.setWordWrap(True)
         layout.addWidget(self.label)
         self.setLayout(layout)
 
-        # Установка позиционирования уведомления в правом нижнем углу
+        # Установка начального положения уведомления (ниже экрана)
         screen_geometry = QtWidgets.QDesktopWidget().screenGeometry()
-        self.setGeometry(screen_geometry.width() - self.width() - 20, screen_geometry.height() - self.height() - 20,
-                         self.width(), self.height())
+        self.setGeometry(screen_geometry.width() - self.width() - 20, screen_geometry.height(), self.width(), self.height())
 
+        # Анимация всплытия
+        self.animation = QtCore.QPropertyAnimation(self, b"pos")
+        self.animation.setDuration(500)  # Длительность анимации в миллисекундах
+        # Начальная позиция ниже экрана
+        self.animation.setStartValue(QPoint(screen_geometry.width() - self.width() - 20, screen_geometry.height()))
+        # Конечная позиция в правом нижнем углу
+        self.animation.setEndValue(
+            QPoint(screen_geometry.width() - self.width() - 20, screen_geometry.height() - self.height() - 20))
 
     def show_notification(self):
         self.show()
+        self.animation.start()
         QtCore.QTimer.singleShot(3000, self.close)
 
 if __name__ == "__main__":
