@@ -196,6 +196,7 @@ class Ui_MainWindow(object):
         self.notification_count -= 1  # Уменьшаем счетчик уведомлений
 
 
+
 # Доп. Классы
 class Notification(QtWidgets.QDialog):
 #Надо создать один VBox и использовать его для отслеживания количества сообщений внутри и удалять их
