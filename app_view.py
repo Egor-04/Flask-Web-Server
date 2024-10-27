@@ -193,7 +193,7 @@ class Ui_MainWindow(object):
         notification.show_notification()
 
     def decrement_counter(self):
-        self.notification_count -= 1  # Уменьшаем счетчик уведомлений
+        self.notification_count = 0  # Уменьшаем счетчик уведомлений
 
 
 
@@ -216,18 +216,19 @@ class Notification(QtWidgets.QDialog):
         self.label.setWordWrap(True)
         layout.addWidget(self.label)
         self.setLayout(layout)
+        print(notification_count)
 
         # Установка начального положения уведомления (ниже экрана)
         screen_geometry = QtWidgets.QDesktopWidget().screenGeometry()
-        self.setGeometry(screen_geometry.width() - self.width() - 20, screen_geometry.height(), self.width(),
-                         self.height())
+        self.setGeometry(screen_geometry.width() - 270, screen_geometry.height() - (notification_count * 70) - 70,
+                         self.width(), self.height())
 
         # Анимация всплытия
         self.animation = QtCore.QPropertyAnimation(self, b"pos")
         self.animation.setDuration(500)
         self.animation.setStartValue(QPoint(screen_geometry.width() - self.width() - 20, screen_geometry.height()))
         self.animation.setEndValue(QPoint(screen_geometry.width() - self.width() - 20,
-                                          screen_geometry.height() - (notification_count * 70) - 70))
+                                          screen_geometry.height() - (notification_count * 90) - 70))
 
         # Установка таймера для удаления уведомления через 4 секунды
         self.timer = QtCore.QTimer(self)
