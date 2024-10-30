@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request, url_for, redirect, abort, jsonify
 import psycopg2
 
+from test import DB_NAME
+
 users = []
 app = Flask(__name__)
-
+DB_NAME = "Electronic Internet Store"
+DB_USER = "administrator"
+DB_HOST = "localhost"
+DB_PASSWORD = "root"
+DB_PORT = "5432"
 
 class User:
     def __init__(self, first_name, second_name, phone_number, password, description):
@@ -13,6 +19,9 @@ class User:
         self.password = password
         self.description = description
 
+
+def connect_db():
+    return psycopg2.connect(database= DB_NAME, user= DB_USER, password= DB_PASSWORD, host= DB_HOST, port= DB_PORT)
 
 @app.route('/')
 def index():
@@ -50,7 +59,7 @@ def get_user(user_id):
 
 
 def add_customer_to_DB(new_user):
-    connection = psycopg2.connect(database="Electronic Internet Store", user="administrator", password="root", host="localhost", port="5432")
+    connection = connect_db()
     cursor = connection.cursor()
 
     try:
