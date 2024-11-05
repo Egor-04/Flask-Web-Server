@@ -369,7 +369,13 @@ class Notification(QtWidgets.QDialog):
         layout = QtWidgets.QVBoxLayout(self)
         self.label = QtWidgets.QLabel(message)
         self.label.setStyleSheet(
-            "color: white; background-color: green; padding: 10px; border-radius: 5px; font-size: 16px;")
+            """
+            background-color: white;     /* Белый фон */
+            border: 2px solid #799fa5;  /* Зеленая рамка */
+            border-radius: 10px;        /* Скругленные края */
+            padding: 10px;              /* Отступы внутри лейбла */
+            font-size: 14px;            /* Размер шрифта */
+            """)
         self.label.setWordWrap(True)
         layout.addWidget(self.label)
         self.setLayout(layout)
