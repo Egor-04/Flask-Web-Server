@@ -11,13 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QLabel
+
+from flask_web_server import web_request
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1920, 1080)
+        MainWindow.resize(1921, 1080)
         MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -74,7 +76,7 @@ class Ui_MainWindow(object):
         self.pushButton_Menu.setIconSize(QtCore.QSize(50, 50))
         self.pushButton_Menu.setObjectName("pushButton_Menu")
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea.setGeometry(QtCore.QRect(10, 180, 1371, 851))
+        self.scrollArea.setGeometry(QtCore.QRect(10, 160, 1371, 871))
         self.scrollArea.setAcceptDrops(False)
         self.scrollArea.setStyleSheet("")
         self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
@@ -83,84 +85,14 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1352, 849))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1352, 869))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.product_1 = QtWidgets.QGroupBox(self.scrollAreaWidgetContents)
-        self.product_1.setGeometry(QtCore.QRect(10, 10, 232, 215))
-        self.product_1.setStyleSheet("QGroupBox {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    border: none; /* Убираем обводку */\n"
-"    color: white; /* Цвет текста */\n"
-"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
-"    width: 100px; /* Ширина кнопки */\n"
-"    height: 100px; /* Высота кнопки */\n"
-"}")
-        self.product_1.setTitle("")
-        self.product_1.setObjectName("product_1")
-        self.label_13 = QtWidgets.QLabel(self.product_1)
-        self.label_13.setGeometry(QtCore.QRect(40, 10, 151, 121))
-        self.label_13.setAutoFillBackground(False)
-        self.label_13.setText("")
-        self.label_13.setPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Monitor.jpg"))
-        self.label_13.setScaledContents(True)
-        self.label_13.setWordWrap(False)
-        self.label_13.setObjectName("label_13")
-        self.pushButton_1_ = QtWidgets.QPushButton(self.product_1)
-        self.pushButton_1_.setGeometry(QtCore.QRect(40, 160, 151, 41))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        font.setStrikeOut(False)
-        self.pushButton_1_.setFont(font)
-        self.pushButton_1_.setStyleSheet("QPushButton {\n"
-"    \n"
-"    background-color: rgb(185, 222, 231);\n"
-"    border: none; /* Убираем обводку */\n"
-"    color: black; /* Цвет текста */\n"
-"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
-"    width: 100px; /* Ширина кнопки */\n"
-"    height: 100px; /* Высота кнопки */\n"
-"}")
-        self.pushButton_1_.setFlat(False)
-        self.pushButton_1_.setObjectName("pushButton_1_")
-        self.product_2 = QtWidgets.QGroupBox(self.scrollAreaWidgetContents)
-        self.product_2.setGeometry(QtCore.QRect(270, 10, 232, 215))
-        self.product_2.setStyleSheet("QGroupBox {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    border: none; /* Убираем обводку */\n"
-"    color: white; /* Цвет текста */\n"
-"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
-"    width: 100px; /* Ширина кнопки */\n"
-"    height: 100px; /* Высота кнопки */\n"
-"}")
-        self.product_2.setTitle("")
-        self.product_2.setObjectName("product_2")
-        self.label_14 = QtWidgets.QLabel(self.product_2)
-        self.label_14.setGeometry(QtCore.QRect(40, 10, 151, 121))
-        self.label_14.setAutoFillBackground(False)
-        self.label_14.setText("")
-        self.label_14.setPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Monitor.jpg"))
-        self.label_14.setScaledContents(True)
-        self.label_14.setWordWrap(False)
-        self.label_14.setObjectName("label_14")
-        self.pushButton_1_1 = QtWidgets.QPushButton(self.product_2)
-        self.pushButton_1_1.setGeometry(QtCore.QRect(40, 160, 151, 41))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        font.setStrikeOut(False)
-        self.pushButton_1_1.setFont(font)
-        self.pushButton_1_1.setStyleSheet("QPushButton {\n"
-"    \n"
-"    background-color: rgb(185, 222, 231);\n"
-"    border: none; /* Убираем обводку */\n"
-"    color: black; /* Цвет текста */\n"
-"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
-"    width: 100px; /* Ширина кнопки */\n"
-"    height: 100px; /* Высота кнопки */\n"
-"}")
-        self.pushButton_1_1.setFlat(False)
-        self.pushButton_1_1.setObjectName("pushButton_1_1")
+        self.gridLayoutWidget = QtWidgets.QWidget(self.scrollAreaWidgetContents)
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(10, 20, 1331, 831))
+        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        self.gridLayout_container = QtWidgets.QGridLayout(self.gridLayoutWidget)
+        self.gridLayout_container.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_container.setObjectName("gridLayout_container")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.frame_Menu = QtWidgets.QFrame(self.centralwidget)
         self.frame_Menu.setGeometry(QtCore.QRect(1550, 90, 371, 951))
@@ -251,6 +183,7 @@ class Ui_MainWindow(object):
 "}")
         self.pushButton_LogIn.setObjectName("pushButton_LogIn")
         self.frame_Cart = QtWidgets.QFrame(self.frame_Menu)
+        self.frame_Cart.setEnabled(True)
         self.frame_Cart.setGeometry(QtCore.QRect(-1, 89, 371, 851))
         self.frame_Cart.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_Cart.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -288,9 +221,52 @@ class Ui_MainWindow(object):
         self.pushButton_Registration.raise_()
         self.pushButton_LogIn.raise_()
         self.frame_Cart.raise_()
+        self.product_item_1 = QtWidgets.QFrame(self.centralwidget)
+        self.product_item_1.setGeometry(QtCore.QRect(1390, 320, 231, 221))
+        self.product_item_1.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.product_item_1.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.product_item_1.setObjectName("product_item_1")
+        self.label_background_1 = QtWidgets.QLabel(self.product_item_1)
+        self.label_background_1.setGeometry(QtCore.QRect(6, 2, 221, 211))
+        self.label_background_1.setStyleSheet("QFrame {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border: none; /* Убираем обводку */\n"
+"    color: white; /* Цвет текста */\n"
+"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
+"    width: 100px; /* Ширина кнопки */\n"
+"    height: 100px; /* Высота кнопки */\n"
+"}")
+        self.label_background_1.setText("")
+        self.label_background_1.setObjectName("label_background_1")
+        self.Icon = QtWidgets.QLabel(self.product_item_1)
+        self.Icon.setGeometry(QtCore.QRect(40, 10, 151, 121))
+        self.Icon.setAutoFillBackground(False)
+        self.Icon.setText("")
+        self.Icon.setPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Monitor.jpg"))
+        self.Icon.setScaledContents(True)
+        self.Icon.setWordWrap(False)
+        self.Icon.setObjectName("Icon")
+        self.pushButton_1_ = QtWidgets.QPushButton(self.product_item_1)
+        self.pushButton_1_.setGeometry(QtCore.QRect(40, 160, 151, 41))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        font.setStrikeOut(False)
+        self.pushButton_1_.setFont(font)
+        self.pushButton_1_.setStyleSheet("QPushButton {\n"
+"    \n"
+"    background-color: rgb(185, 222, 231);\n"
+"    border: none; /* Убираем обводку */\n"
+"    color: black; /* Цвет текста */\n"
+"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
+"    width: 100px; /* Ширина кнопки */\n"
+"    height: 100px; /* Высота кнопки */\n"
+"}")
+        self.pushButton_1_.setFlat(False)
+        self.pushButton_1_.setObjectName("pushButton_1_")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1920, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1921, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -304,16 +280,13 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Online Electronics Store"))
         self.label.setText(_translate("MainWindow", "Electro-NX"))
-        self.pushButton_1_.setText(_translate("MainWindow", "Add to Bascket"))
-        self.pushButton_1_1.setText(_translate("MainWindow", "Add to Bascket"))
         self.label_Username.setText(_translate("MainWindow", "User - 12349042"))
         self.label_PhoneNumber.setText(_translate("MainWindow", "+79338839675"))
         self.pushButton_Cart.setText(_translate("MainWindow", "Cart"))
         self.pushButton_Registration.setText(_translate("MainWindow", "Registration"))
         self.pushButton_LogIn.setText(_translate("MainWindow", "Log In"))
         self.pushButton_Close_Cart.setText(_translate("MainWindow", "<--"))
-
-
+        self.pushButton_1_.setText(_translate("MainWindow", "Add to Bascket"))
 
 
 
@@ -322,9 +295,14 @@ class Ui_MainWindow(object):
         self.frame_Menu.hide()
         self.frame_Cart.hide()
 
+        # Web Server Responses
+        self.load_products()
+
+        #Products Items
+        self.gridLayout_container.addWidget(self.product_item_1)
+
         #Buttons Actions
         self.pushButton_1_.clicked.connect(self.add_to_cart)
-        self.pushButton_1_1.clicked.connect(self.add_to_cart)
 
         self.pushButton_Menu.clicked.connect(self.open_menu)
 
@@ -335,11 +313,7 @@ class Ui_MainWindow(object):
         effect1 = QGraphicsDropShadowEffect(
             offset=QPoint(0, 5), blurRadius=8, color=QColor("#a2a2a2")
         )
-        effect2 = QGraphicsDropShadowEffect(
-            offset=QPoint(0, 5), blurRadius=8, color=QColor("#a2a2a2")
-        )
-        self.product_1.setGraphicsEffect(effect1)
-        self.product_2.setGraphicsEffect(effect2)
+        self.product_item_1.setGraphicsEffect(effect1)
 
     def add_to_cart(self):
         self.notification_count += 1
@@ -362,6 +336,24 @@ class Ui_MainWindow(object):
             self.frame_Cart.hide()
         else:
             self.frame_Cart.show()
+
+    def load_products(self):
+        try:
+            response = web_request()  # URL сервера Flask
+            response.raise_for_status()
+            products = response.json()
+            print(products)
+
+            # Очистка предыдущих виджетов перед добавлением новых
+            for widget in self.gridLayout_container.children():
+                widget.deleteLater()
+
+            # Добавление новых продуктов в QGridLayout
+            for idx, (product_id, product_name) in enumerate(products):
+                self.gridLayout_container.addWidget(QLabel(f'Product ID: {product_id} | Name: {product_name}', self.gridLayoutWidget))
+
+        except web_request().exceptions.RequestException as e:
+            print(e)
 
 # Доп. Классы
 class Notification(QtWidgets.QDialog):
@@ -410,6 +402,8 @@ class Notification(QtWidgets.QDialog):
     def show_notification(self):
         self.show()
         self.animation.start()  # Запустить анимацию при показе уведомления
+
+
 
 if __name__ == "__main__":
     import sys

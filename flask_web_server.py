@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, abort, jsonify
+import requests
 import psycopg2
 
 from test import DB_NAME
@@ -58,6 +59,18 @@ def get_user(user_id):
     return jsonify(users[user_id].__dict__)
 
 
+@app.route('/products', methods=['GET'])
+def get_products():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT GOODS_ID, goods_name FROM Goods;')
+    products = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    return jsonify(products)
+
+
 def add_customer_to_DB(new_user):
     connection = connect_db()
     cursor = connection.cursor()
@@ -71,6 +84,10 @@ def add_customer_to_DB(new_user):
         cursor.close()
         connection.commit()
         connection.close()
+
+
+def web_request():
+    return requests.get('http://127.0.0.1:5000/products')
 
 
 if __name__ == '__main__':
