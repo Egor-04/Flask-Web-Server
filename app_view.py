@@ -221,49 +221,6 @@ class Ui_MainWindow(object):
         self.pushButton_Registration.raise_()
         self.pushButton_LogIn.raise_()
         self.frame_Cart.raise_()
-        self.product_item_1 = QtWidgets.QFrame(self.centralwidget)
-        self.product_item_1.setGeometry(QtCore.QRect(1390, 320, 231, 221))
-        self.product_item_1.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.product_item_1.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.product_item_1.setObjectName("product_item_1")
-        self.label_background_1 = QtWidgets.QLabel(self.product_item_1)
-        self.label_background_1.setGeometry(QtCore.QRect(6, 2, 221, 211))
-        self.label_background_1.setStyleSheet("QFrame {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    border: none; /* Убираем обводку */\n"
-"    color: white; /* Цвет текста */\n"
-"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
-"    width: 100px; /* Ширина кнопки */\n"
-"    height: 100px; /* Высота кнопки */\n"
-"}")
-        self.label_background_1.setText("")
-        self.label_background_1.setObjectName("label_background_1")
-        self.Icon = QtWidgets.QLabel(self.product_item_1)
-        self.Icon.setGeometry(QtCore.QRect(40, 10, 151, 121))
-        self.Icon.setAutoFillBackground(False)
-        self.Icon.setText("")
-        self.Icon.setPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Monitor.jpg"))
-        self.Icon.setScaledContents(True)
-        self.Icon.setWordWrap(False)
-        self.Icon.setObjectName("Icon")
-        self.pushButton_1_ = QtWidgets.QPushButton(self.product_item_1)
-        self.pushButton_1_.setGeometry(QtCore.QRect(40, 160, 151, 41))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        font.setStrikeOut(False)
-        self.pushButton_1_.setFont(font)
-        self.pushButton_1_.setStyleSheet("QPushButton {\n"
-"    \n"
-"    background-color: rgb(185, 222, 231);\n"
-"    border: none; /* Убираем обводку */\n"
-"    color: black; /* Цвет текста */\n"
-"    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
-"    width: 100px; /* Ширина кнопки */\n"
-"    height: 100px; /* Высота кнопки */\n"
-"}")
-        self.pushButton_1_.setFlat(False)
-        self.pushButton_1_.setObjectName("pushButton_1_")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1921, 21))
@@ -286,7 +243,7 @@ class Ui_MainWindow(object):
         self.pushButton_Registration.setText(_translate("MainWindow", "Registration"))
         self.pushButton_LogIn.setText(_translate("MainWindow", "Log In"))
         self.pushButton_Close_Cart.setText(_translate("MainWindow", "<--"))
-        self.pushButton_1_.setText(_translate("MainWindow", "Add to Bascket"))
+
 
 
 
@@ -299,21 +256,13 @@ class Ui_MainWindow(object):
         self.load_products()
 
         #Products Items
-        self.gridLayout_container.addWidget(self.product_item_1)
+
 
         #Buttons Actions
-        self.pushButton_1_.clicked.connect(self.add_to_cart)
-
         self.pushButton_Menu.clicked.connect(self.open_menu)
 
         self.pushButton_Cart.clicked.connect(self.open_close_cart)
         self.pushButton_Close_Cart.clicked.connect(self.open_close_cart)
-
-        # Effects
-        effect1 = QGraphicsDropShadowEffect(
-            offset=QPoint(0, 5), blurRadius=8, color=QColor("#a2a2a2")
-        )
-        self.product_item_1.setGraphicsEffect(effect1)
 
     def add_to_cart(self):
         self.notification_count += 1
@@ -348,12 +297,90 @@ class Ui_MainWindow(object):
             for widget in self.gridLayout_container.children():
                 widget.deleteLater()
 
-            # Добавление новых продуктов в QGridLayout
-            for idx, (product_id, product_name) in enumerate(products):
-                self.gridLayout_container.addWidget(QLabel(f'Product ID: {product_id} | Name: {product_name}', self.gridLayoutWidget))
+            prod_counts_in_DB = 0
+            for i, (product_id, product_name) in enumerate(products):
+                    prod_counts_in_DB += 1
+
+            max_columns = 4
+
+            for i, (product_id, product_name) in enumerate(products):
+                print(f"Container: {len(self.gridLayout_container)} || Count: {prod_counts_in_DB}")
+
+                if len(self.gridLayout_container) < prod_counts_in_DB:
+                    current_row = i // max_columns
+                    current_col = i % max_columns
+                    print(current_row, current_col, product_id)
+
+                    self.create_product_item(current_row, current_col, product_id, product_name)
 
         except web_request().exceptions.RequestException as e:
             print(e)
+
+    def create_product_item(self, i, j, id, name):
+        self.product_item = QtWidgets.QFrame(self.centralwidget)
+        self.product_item.setGeometry(QtCore.QRect(1390, 320, 231, 221))
+        self.product_item.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.product_item.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.product_item.setObjectName(f"product_item_{i}")
+        effect1 = QGraphicsDropShadowEffect(
+            offset=QPoint(0, 5), blurRadius=8, color=QColor("#a2a2a2")
+        )
+        self.product_item.setGraphicsEffect(effect1)
+
+        self.label_background = QtWidgets.QLabel(self.product_item)
+        self.label_background.setGeometry(QtCore.QRect(6, 2, 221, 200))
+        self.label_background.setStyleSheet("QFrame {\n"
+                                              "    background-color: rgb(255, 255, 255);\n"
+                                              "    border: none; /* Убираем обводку */\n"
+                                              "    color: white; /* Цвет текста */\n"
+                                              "    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
+                                              "    width: 100px; /* Ширина кнопки */\n"
+                                              "    height: 100px; /* Высота кнопки */\n"
+                                              "}")
+        self.label_background.setText(f"")
+        self.label_background.setObjectName(f"label_background_{i}")
+
+        self.label_text_product_name = QtWidgets.QLabel(self.product_item)
+        self.label_text_product_name.setGeometry(QtCore.QRect(60, 28, 221, 221))
+        self.label_text_product_name.setObjectName(f"product_name_{i}")
+        self.label_text_product_name.setText(f"ID: {id} — {name}")
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        font.setStrikeOut(False)
+        self.label_text_product_name.setFont(font)
+
+        self.Icon = QtWidgets.QLabel(self.product_item)
+        self.Icon.setGeometry(QtCore.QRect(40, 10, 151, 110))
+        self.Icon.setAutoFillBackground(False)
+        self.Icon.setText("")
+        self.Icon.setPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Monitor.jpg"))
+        self.Icon.setScaledContents(True)
+        self.Icon.setWordWrap(False)
+        self.Icon.setObjectName("Icon")
+        self.pushButton = QtWidgets.QPushButton(self.product_item)
+        self.pushButton.setGeometry(QtCore.QRect(40, 150, 151, 41))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        font.setStrikeOut(False)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("QPushButton {\n"
+                                         "    \n"
+                                         "    background-color: rgb(185, 222, 231);\n"
+                                         "    border: none; /* Убираем обводку */\n"
+                                         "    color: black; /* Цвет текста */\n"
+                                         "    border-radius: 12%; /* Установка радиуса обводки на 50% для округления кнопки */\n"
+                                         "    width: 100px; /* Ширина кнопки */\n"
+                                         "    height: 100px; /* Высота кнопки */\n"
+                                         "}")
+        self.pushButton.setFlat(False)
+        self.pushButton.setObjectName(f"pushButton_{i}_")
+
+        self.gridLayout_container.addWidget(self.product_item, i, j)
+        self.pushButton.setText("Add to Bascket")
+        self.pushButton.clicked.connect(self.add_to_cart)
+
 
 # Доп. Классы
 class Notification(QtWidgets.QDialog):
