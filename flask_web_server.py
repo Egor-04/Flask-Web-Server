@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, url_for, redirect, abort, jso
 import requests
 import psycopg2
 
-from test import DB_NAME
-
 users = []
 app = Flask(__name__)
 DB_NAME = "Electronic Internet Store"
@@ -63,7 +61,7 @@ def get_user(user_id):
 def get_products():
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute('SELECT GOODS_ID, goods_name FROM Goods;')
+    cursor.execute('SELECT GOODS_ID, goods_name, goods_image_url FROM Goods;')
     products = cursor.fetchall()
     cursor.close()
     conn.close()

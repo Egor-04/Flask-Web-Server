@@ -10,9 +10,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QPixmap
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QLabel
 
+import image_loader
 from flask_web_server import web_request
 
 
@@ -298,12 +299,12 @@ class Ui_MainWindow(object):
                 widget.deleteLater()
 
             prod_counts_in_DB = 0
-            for i, (product_id, product_name) in enumerate(products):
+            for i, (product_id, product_name, product_img_url) in enumerate(products):
                     prod_counts_in_DB += 1
 
             max_columns = 4
 
-            for i, (product_id, product_name) in enumerate(products):
+            for i, (product_id, product_name, product_img_url) in enumerate(products):
                 print(f"Container: {len(self.gridLayout_container)} || Count: {prod_counts_in_DB}")
 
                 if len(self.gridLayout_container) < prod_counts_in_DB:
@@ -311,12 +312,13 @@ class Ui_MainWindow(object):
                     current_col = i % max_columns
                     print(current_row, current_col, product_id)
 
-                    self.create_product_item(current_row, current_col, product_id, product_name)
+                    self.create_product_item(current_row, current_col, product_id, product_name, product_img_url)
 
         except web_request().exceptions.RequestException as e:
             print(e)
 
-    def create_product_item(self, i, j, id, name):
+
+    def create_product_item(self, i, j, id, name, img_url):
         self.product_item = QtWidgets.QFrame(self.centralwidget)
         self.product_item.setGeometry(QtCore.QRect(1390, 320, 231, 221))
         self.product_item.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -350,14 +352,17 @@ class Ui_MainWindow(object):
         font.setStrikeOut(False)
         self.label_text_product_name.setFont(font)
 
-        self.Icon = QtWidgets.QLabel(self.product_item)
-        self.Icon.setGeometry(QtCore.QRect(40, 10, 151, 110))
-        self.Icon.setAutoFillBackground(False)
-        self.Icon.setText("")
-        self.Icon.setPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Monitor.jpg"))
-        self.Icon.setScaledContents(True)
-        self.Icon.setWordWrap(False)
-        self.Icon.setObjectName("Icon")
+        image_data = image_loader.download_image(img_url)
+
+        if image_data:
+            self.label_img = QLabel()
+            self.label_img = QtWidgets.QLabel(self.product_item)
+            self.label_img.setScaledContents(True)
+            self.label_img.setGeometry(QtCore.QRect(50, 10, 130, 110))
+            self.Icon = QPixmap()
+            self.Icon.loadFromData(image_data)
+            self.label_img.setPixmap(self.Icon)
+
         self.pushButton = QtWidgets.QPushButton(self.product_item)
         self.pushButton.setGeometry(QtCore.QRect(40, 150, 151, 41))
         font = QtGui.QFont()
