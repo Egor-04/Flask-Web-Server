@@ -62,18 +62,31 @@ class Ui_MainWindow(object):
         self.pushButton.setGeometry(QtCore.QRect(1770, 20, 51, 51))
         self.pushButton.setStyleSheet("background-color: rgba(255, 255, 255, 0);")
         self.pushButton.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon)
+
+        search_image_data = image_loader.download_image("https://ltdfoto.ru/images/2024/11/08/Search.png")
+        if search_image_data:
+            icon_search = QtGui.QIcon()
+            pixmap_search = QtGui.QPixmap()
+            pixmap_search.loadFromData(search_image_data)
+            icon_search.addPixmap(pixmap_search)
+            self.pushButton.setIcon(icon_search)
+
         self.pushButton.setIconSize(QtCore.QSize(50, 50))
         self.pushButton.setObjectName("pushButton")
         self.pushButton_Menu = QtWidgets.QPushButton(self.logoSpace)
         self.pushButton_Menu.setGeometry(QtCore.QRect(1840, 20, 61, 41))
         self.pushButton_Menu.setStyleSheet("background-color: rgba(255, 255, 255, 0);")
         self.pushButton_Menu.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../Online_Electronics_Store/Images/Menu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_Menu.setIcon(icon1)
+
+
+        menu_image_data = image_loader.download_image("https://ltdfoto.ru/images/2024/11/08/Menu.png")
+        if menu_image_data:
+            icon_menu = QtGui.QIcon()
+            pixmap_menu = QtGui.QPixmap()
+            pixmap_menu.loadFromData(menu_image_data)
+            icon_menu.addPixmap(pixmap_menu)
+            self.pushButton_Menu.setIcon(icon_menu)
+
         self.pushButton_Menu.setIconSize(QtCore.QSize(50, 50))
         self.pushButton_Menu.setObjectName("pushButton_Menu")
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
@@ -132,7 +145,15 @@ class Ui_MainWindow(object):
         self.label_Avatar = QtWidgets.QLabel(self.frame_Menu)
         self.label_Avatar.setGeometry(QtCore.QRect(20, 10, 61, 61))
         self.label_Avatar.setText("")
-        self.label_Avatar.setPixmap(QtGui.QPixmap("C:/Users/Егор Михайловский/Downloads/Avatar.png"))
+
+        avatar_image_data = image_loader.download_image("https://ltdfoto.ru/images/2024/11/08/Avatar.png")
+        if avatar_image_data:
+            icon_avatar = QtGui.QIcon()
+            pixmap_avatar = QtGui.QPixmap()
+            pixmap_avatar.loadFromData(avatar_image_data)
+            icon_avatar.addPixmap(pixmap_avatar)
+            self.label_Avatar.setPixmap(pixmap_avatar)
+
         self.label_Avatar.setScaledContents(True)
         self.label_Avatar.setObjectName("label_Avatar")
         self.label_background = QtWidgets.QLabel(self.frame_Menu)
